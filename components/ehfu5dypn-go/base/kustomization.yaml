@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+commonLabels:         
+  argocd/app-name: ehfu5dypn-go
+  janus-idp.io/tekton: ehfu5dypn-go
+  backstage.io/kubernetes-id: ehfu5dypn-go
+  backstage.io/kubernetes-namespace: tssc-app 
+  app.kubernetes.io/part-of: ehfu5dypn-go
+resources:
+  - deployment.yaml
+  - route.yaml
+  - service.yaml

@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ehfu5dypn-go-ci
+  namespace: tssc-gitops
+  finalizers: ["resources-finalizer.argocd.argoproj.io"]
+spec:
+  project: default
+  source:
+    path: ./components/ehfu5dypn-go/overlays/ci
+    repoURL: https://github.com/rhtap-rhdh-qe/ehfu5dypn-go-gitops.git
+    targetRevision: main
+  destination:
+    namespace: tssc-app-ci
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    managedNamespaceMetadata:
+      labels:
+        argocd.argoproj.io/managed-by: tssc-gitops
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true
